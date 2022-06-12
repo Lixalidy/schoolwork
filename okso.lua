@@ -1095,3 +1095,9 @@ local plr = game.Players.LocalPlayer
 tpservice:Teleport(game.PlaceId, plr)
 
 end)
+
+Tab2Section:NewButton("Anti cheat disable", "DISABLE ANTI CHEAT YOU CANT ATTACK!!!", function()
+
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/joke%20anticheat.lua'),true))()
+
+end)
