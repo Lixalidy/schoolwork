@@ -1086,7 +1086,7 @@ Tab2Section:NewButton("Fix Cam", "fix camera bug on mobile", function()
 
 end)
 
-Tab2Section:NewButton("Fix Tracers Mobile for Mobile", "rejoins the game", function()
+Tab2Section:NewButton("Rejoins", "rejoins the game obv", function()
 
 local tpservice= game:GetService("TeleportService")
 
