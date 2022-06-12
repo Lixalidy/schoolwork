@@ -1086,7 +1086,7 @@ Tab2Section:NewButton("Fix Cam", "fix camera bug on mobile", function()
 
 end)
 
-Tab2Section:NewButton("Rejoins", "rejoins the game obv", function()
+Tab2Section:NewButton("Rejoin", "rejoins the game obv", function()
 
 local tpservice= game:GetService("TeleportService")
 
@@ -1096,7 +1096,7 @@ tpservice:Teleport(game.PlaceId, plr)
 
 end)
 
-Tab2Section:NewButton("Anti cheat disable", "DISABLE ANTI CHEAT YOU CANT ATTACK!!! (!!!NOT MINE!!!)", function()
+Tab2Section:NewButton("AntiCheat Disabler", "!!! NOT MINE !!!", function()
 
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/joke%20anticheat.lua'),true))()
 
