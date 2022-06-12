@@ -766,9 +766,9 @@ local Tab1 = window:NewTab("Main")
 
 local Tab1Section = Tab1:NewSection("Bedwars")
 
-local Tab2 = window:NewTab("other")
+local Tab2 = window:NewTab("Other")
 
-local Tab2Section = Tab1:NewSection("etc")
+local Tab2Section = Tab2:NewSection("etc")
 
 -- Buttons
 
@@ -1072,7 +1072,7 @@ if lplr.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
 
 end)
 
-Tab1Section:NewButton("Make You Feel Cool","a visual ig",function()
+Tab1Section:NewButton("Better graphics","a visual ig",function()
 
 loadstring(game:HttpGet("https://pastebin.com/raw/MSZPFVfE",true))()
 
@@ -1086,7 +1086,7 @@ Tab2Section:NewButton("Fix Cam", "fix camera bug on mobile", function()
 
 end)
 
-Tab2Section:NewButton("fix tracers mobile for mobile", "rejoins the game", function()
+Tab2Section:NewButton("Fix Tracers Mobile for Mobile", "rejoins the game", function()
 
 local tpservice= game:GetService("TeleportService")
 
