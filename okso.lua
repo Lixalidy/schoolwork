@@ -766,9 +766,9 @@ local Tab1 = window:NewTab("Main")
 
 local Tab1Section = Tab1:NewSection("Bedwars")
 
+local Tab2 = window:NewTab("other")
 
-
- 
+local Tab2Section = Tab1:NewSection("etc")
 
 -- Buttons
 
@@ -1078,10 +1078,20 @@ loadstring(game:HttpGet("https://pastebin.com/raw/MSZPFVfE",true))()
 
 end)
 
-Tab1Section:NewButton("FixCam", "fix camera bug on mobile", function()
+Tab2Section:NewButton("Fix Cam", "fix camera bug on mobile", function()
 
 	cam.CameraType = Enum.CameraType.Fixed
 
 	cam.CameraType = Enum.CameraType.Custom
+
+end)
+
+Tab2Section:NewButton("fix tracers mobile for mobile", "rejoins the game", function()
+
+local tpservice= game:GetService("TeleportService")
+
+local plr = game.Players.LocalPlayer
+
+tpservice:Teleport(game.PlaceId, plr)
 
 end)
