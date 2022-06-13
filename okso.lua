@@ -20,7 +20,43 @@
 
 
 
+function nuker()
 
+	local beds = getbeds()
+
+	for _,bed in pairs(beds) do
+
+		local bedmagnitude = (bed.Position - game.Players.LocalPlayer.Character.PrimaryPart.Position).Magnitude
+
+		if bedmagnitude < 27 then
+
+			local upnum = blocks(bed.Position)
+
+			local x = math.round(bed.Position.X/3)
+
+			local y = math.round(bed.Position.Y/3) + upnum
+
+			local z = math.round(bed.Position.Z/3)
+
+			game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.DamageBlock:InvokeServer({
+
+				["blockRef"] = {
+
+					["blockPosition"] = Vector3.new(x,y,z)
+
+				},
+
+				["hitPosition"] = Vector3.new(x,y,z),
+
+				["hitNormal"] = Vector3.new(x,y,z),
+
+			})
+
+		end
+
+	end
+
+end
 
 local SytroWaterMark = Instance.new("ScreenGui")
 
@@ -846,6 +882,24 @@ game:GetService("UserInputService").JumpRequest:connect(function()
 		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 	end
 end)
+
+end)
+
+Tab1Section:NewToggle("Bed Nuker", "Auto break bed and covers", function(state)
+
+	if state then
+
+		BindToStepped("BedNuker", 1, function()
+
+			nuker()
+
+		end)
+
+	else
+
+		UnbindFromStepped("BedNuker")
+
+	end
 
 end)
 
