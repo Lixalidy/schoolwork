@@ -1,10 +1,9 @@
 
 
-
 if game.Players.LocalPlayer.UserId == 1 then
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("ola soy pro wey xd","All")
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("IM GAY","All")
 wait(0.7)
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("caca lol","All")
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("im so gay","All")
 else
 print("your good")
 end
@@ -13,14 +12,38 @@ end
 
 
 
+--Notify stars
+
+if game.Players.LocalPlayer.UserId == 2806417032 then
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Bienvenido,";
+
+    Text = "Migue  -⭐-  brian80095";
+
+    Duration = 6.9;
+})
+end
+
+if game.Players.LocalPlayer.UserId == 2547373189 then
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Welcome,";
+
+    Text = "Stars  -⭐-  StarsAboveTokyo";
+
+    Duration = 6.9;
+})
+end
 
 
+if game.Players.LocalPlayer.UserId == 472813752 then
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Welcome,";
 
+    Text = "Immortal  -⭐-  Lixalidy";
 
-
-
-
-
+    Duration = 6.9;
+})
+end
 
 
 
@@ -70,7 +93,7 @@ TextLabel.Size = UDim2.new(0.170134634, 0, 0.0700389072, 0)
 
 TextLabel.Font = Enum.Font.GothamBold
 
-TextLabel.Text = "❌no hacker squad❌"
+TextLabel.Text = "Midnight X"
 
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 
@@ -84,7 +107,11 @@ TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
 TextLabel.MouseButton1Down:Connect(function()
 
-	print("Everthing its made by me, yes exactly jn")end)
+print("Copyright Midnight X LCC")
+
+print("All right reserved")
+
+end)
 
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(126, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(209, 0, 0))}
 
@@ -104,7 +131,7 @@ TextLabel_2.Size = UDim2.new(1, 0, 1, 0)
 
 TextLabel_2.Font = Enum.Font.GothamBold
 
-TextLabel_2.Text = "v1"
+TextLabel_2.Text = "v3"
 
 TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 
@@ -140,29 +167,19 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 
 end)
 
- 
+loadstring(game:HttpGet("https://pastebin.com/raw/Aic7hjwa",true))() --Name Protection (thanks to 3dsboy08 hes a daddy)
 
 game.StarterGui:SetCore("SendNotification", {
 
-    Title = "trolling";
+    Title = "🌠 Midnight 🌠";
 
-    Text = "😎Made by Lixalidy😎"; -- what the text says (ofc)
+    Text = "Midnight X Has Successfully Loaded Thanks for choosing us!"; -- what the text says (ofc)
 
     Duration = 5;
 
 })
 
 wait(1)
-
-game.StarterGui:SetCore("SendNotification", {
-
-    Title = "! ALERT !";
-
-    Text = "❌❌❌ hackers are bad so kill all of them ❌❌❌";
-
-    Duration = 6.9;
-
-})
 
 local players = game:GetService("Players")
 
@@ -680,7 +697,7 @@ end
 
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandLittleBrother/SytroNight4ROBLOX/main/libraries/kavo.lua"))()
 
-local window = kavoUi.CreateLib("we did a little bit of trolling", "BloodTheme")
+local window = kavoUi.CreateLib("🌠 Midnight X 🌠", "Midnight")
 
 local entity = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/Libraries/entityHandler.lua", true))()
 
@@ -748,9 +765,15 @@ local Tab3 = window:NewTab("World")
 
 local Tab3Section = Tab3:NewSection("Anti Void")
 
+local Tab4 = window:NewTab("All-In-One")
+
+local Tab4Section = Tab4:NewSection("! Coming Soon !")
+
 local Tab2 = window:NewTab("Other")
 
 local Tab2Section = Tab2:NewSection("etc")
+
+
 
 
 
@@ -788,7 +811,7 @@ Tab1Section:NewToggle("CFrame", "", function(state)
 
 end)
 
-Tab1Section:NewSlider("Speed 1-41", "Adjust CFrame speed", 41, 1, function(s)
+Tab1Section:NewSlider("Speed 16-41", "Adjust CFrame speed", 41, 16, function(s)
 
 	speedval["Value"] = s
 
@@ -1086,10 +1109,27 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-script
 
 end)
 
-Tab2Section:NewButton("120 FOV", "!!! NOT MINE !!!", function()
-		
+Tab2Section:NewButton("120 FOV (buggy)", "!!! NOT MINE !!! !!! CAN'T CHANGE !!!", function()
+
+while wait(0.1) do
+
 game.Workspace.Camera.FieldOfView = 120
 
+end
+
+end)
+
+Tab2Section:NewToggle("Sprint", "Automatically on your sprint", function(state)
+	if state then
+		BindToStepped("Sprint", 1, function()
+			if SprintCont.sprinting == false then
+				SprintCont:startSprinting()
+			end
+		end)
+	else
+		UnbindFromStepped("Sprint")
+		SprintCont:stopSprinting()
+	end
 end)
 
 runcode(function()
