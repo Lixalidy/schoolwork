@@ -2,7 +2,15 @@
 
 
 
+if game.Players.LocalPlayer.UserId == 2806417032 then
 
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("soy mr reaper","All")
+
+wait(1.2)	
+
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("por q no se como cagar","All")
+
+else
 
 
 
@@ -1075,6 +1083,12 @@ end)
 Tab2Section:NewButton("AntiCheat Disabler", "!!! NOT MINE !!!", function()
 
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/joke%20anticheat.lua'),true))()
+
+end)
+
+Tab2Section:NewButton("120 FOV", "!!! NOT MINE !!!", function()
+		
+game.Workspace.Camera.FieldOfView = 120
 
 end)
 
