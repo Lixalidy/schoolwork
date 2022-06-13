@@ -10,7 +10,7 @@ print("your good")
 end
 
 
-
+wait(5)
 
 local player = game:GetService("Players")
 
