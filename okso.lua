@@ -890,6 +890,16 @@ Tab1Section:NewToggle("No Fall Damage", "Opens No Fall Damage", function(callbac
 
 end)
 
+Velocity:NewToggle("Anti KB", "Prevents taking a knockback", function(state)
+	if state then
+		KnockbackTable["kbDirectionStrength"] = 0
+		KnockbackTable["kbUpwardStrength"] = 0
+	else
+		KnockbackTable["kbDirectionStrength"] = 100
+		KnockbackTable["kbUpwardStrength"] = 100
+	end
+end)
+
 Tab1Section:NewButton("ESP", "give u esp duh", function()
 
 local start = tick()
