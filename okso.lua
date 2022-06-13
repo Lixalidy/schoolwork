@@ -3,7 +3,7 @@
 if game.Players.LocalPlayer.UserId == 1 then
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("IM GAY","All")
 wait(0.7)
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("im so gay","All")
+game.ReplicatedStorage.DefaultChatSystemCRhatEvents.SayMessageRequest:FireServer("im so gay","All")
 else
 print("your good")
 end
@@ -890,7 +890,7 @@ Tab1Section:NewToggle("No Fall Damage", "Opens No Fall Damage", function(callbac
 
 end)
 
-Velocity:NewToggle("Anti KB", "Prevents taking a knockback", function(state)
+Tab1Section:NewToggle("Anti KB", "Prevents taking a knockback", function(state)
 	if state then
 		KnockbackTable["kbDirectionStrength"] = 0
 		KnockbackTable["kbUpwardStrength"] = 0
