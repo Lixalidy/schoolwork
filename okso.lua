@@ -20,43 +20,11 @@
 
 
 
-function nuker()
 
-	local beds = getbeds()
 
-	for _,bed in pairs(beds) do
 
-		local bedmagnitude = (bed.Position - game.Players.LocalPlayer.Character.PrimaryPart.Position).Magnitude
 
-		if bedmagnitude < 27 then
 
-			local upnum = blocks(bed.Position)
-
-			local x = math.round(bed.Position.X/3)
-
-			local y = math.round(bed.Position.Y/3) + upnum
-
-			local z = math.round(bed.Position.Z/3)
-
-			game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.DamageBlock:InvokeServer({
-
-				["blockRef"] = {
-
-					["blockPosition"] = Vector3.new(x,y,z)
-
-				},
-
-				["hitPosition"] = Vector3.new(x,y,z),
-
-				["hitNormal"] = Vector3.new(x,y,z),
-
-			})
-
-		end
-
-	end
-
-end
 
 local SytroWaterMark = Instance.new("ScreenGui")
 
@@ -227,6 +195,10 @@ local testtogttt = {["Value"] = 20}
 local ACC1
 
 local ACC2
+
+local antivoidtransparent = {["Value"] = 50}
+
+local antivoidcolor = {["Hue"] = 0.93, ["Sat"] = 1, ["Value"] = 1}
 
 local antivoidtransparent = {["Value"] = 50}
 
@@ -698,44 +670,6 @@ function blocks(bed)
 
 end
 
-function nuker()
-
-	local beds = getbeds()
-
-	for _,bed in pairs(beds) do
-
-		local bedmagnitude = (bed.Position - game.Players.LocalPlayer.Character.PrimaryPart.Position).Magnitude
-
-		if bedmagnitude < 27 then
-
-			local upnum = blocks(bed.Position)
-
-			local x = math.round(bed.Position.X/3)
-
-			local y = math.round(bed.Position.Y/3) + upnum
-
-			local z = math.round(bed.Position.Z/3)
-
-			game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.DamageBlock:InvokeServer({
-
-				["blockRef"] = {
-
-					["blockPosition"] = Vector3.new(x,y,z)
-
-				},
-
-				["hitPosition"] = Vector3.new(x,y,z),
-
-				["hitNormal"] = Vector3.new(x,y,z),
-
-			})
-
-		end
-
-	end
-
-end
-
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandLittleBrother/SytroNight4ROBLOX/main/libraries/kavo.lua"))()
 
 local window = kavoUi.CreateLib("we did a little bit of trolling", "BloodTheme")
@@ -802,9 +736,15 @@ local Tab1 = window:NewTab("Main")
 
 local Tab1Section = Tab1:NewSection("Bedwars")
 
+local Tab3 = window:NewTab("World")
+
+local Tab3Section = Tab3:NewSection("Anti Void")
+
 local Tab2 = window:NewTab("Other")
 
 local Tab2Section = Tab2:NewSection("etc")
+
+
 
 -- Buttons
 
@@ -882,24 +822,6 @@ game:GetService("UserInputService").JumpRequest:connect(function()
 		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 	end
 end)
-
-end)
-
-Tab1Section:NewToggle("Bed Nuker", "Auto break bed and covers", function(state)
-
-	if state then
-
-		BindToStepped("BedNuker", 1, function()
-
-			nuker()
-
-		end)
-
-	else
-
-		UnbindFromStepped("BedNuker")
-
-	end
 
 end)
 
@@ -1155,3 +1077,54 @@ Tab2Section:NewButton("AntiCheat Disabler", "!!! NOT MINE !!!", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/joke%20anticheat.lua'),true))()
 
 end)
+
+runcode(function()
+	local antivoidp
+end)
+
+Tab3Section:NewToggle("AntiVoid", "Give's you a second chance to get back on land", function(state)
+	if state then
+		antivoidp = Instance.new("Part", workspace)
+		antivoidp.Name = "AntiVoid"
+		antivoidp.CanCollide = true
+		antivoidp.Size = Vector3.new(2048, 1, 2048)
+		antivoidp.Anchored = true
+		antivoidp.Transparency = 1 - (antivoidtransparent["Value"] / 100)
+		antivoidp.Material = Enum.Material.Neon
+		antivoidp.Color = Color3.fromHSV(antivoidcolor["Hue"], antivoidcolor["Sat"], antivoidcolor["Value"])
+		antivoidp.Position = Vector3.new(0, 23.5, 0)
+		antivoidp.Touched:connect(function(touchedvoid)
+			if touchedvoid.Parent:FindFirstChild("Humanoid") and touchedvoid.Parent.Name == lplr.Name then
+				lplr.Character.Humanoid.Jump = true
+				lplr.Character.Humanoid:ChangeState("Jumping")
+				wait(0.2)
+				lplr.Character.Humanoid:ChangeState("Jumping")
+				wait(0.2)
+				lplr.Character.Humanoid:ChangeState("Jumping")
+			end
+		end)
+	else
+		if antivoidp then
+			antivoidp:Remove()
+		end
+	end
+end)
+
+Tab3Section:NewColorPicker("Color", "Adjust antivoid color", Color3.fromHSV(antivoidcolor["Hue"], antivoidcolor["Sat"], antivoidcolor["Value"]), function(val)
+	if antivoidp then
+		antivoidp.Color = (val)
+	end
+end)
+
+Tab3Section:NewSlider("Invisible 1-100", "Adjust antivoid transparency", 100, 0, function(val)
+	if antivoidp then
+		antivoidp.Transparency = 1 - (val / 100)
+	end
+end)
+
+local UI = UI:NewSection("Colors")
+for theme, color in pairs(colors) do
+	UI:NewColorPicker(theme, "Change your "..theme, color, function(color3)
+		kavoUi:ChangeColor(theme, color3)
+	end)
+end
