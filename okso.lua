@@ -5,80 +5,9 @@
 
 
 
-spawn(function()
-	for i,v in pairs(game:GetService("Lighting"):GetChildren()) do
-		if v:IsA("Atmosphere") or v:IsA("Sky") or v:IsA("PostEffect") then
-			v:Remove()
-		end
-	end
-	local sky = Instance.new("Sky")
-	sky.StarCount = 5000
-	sky.SkyboxUp = "rbxassetid://9468074724"
-	sky.SkyboxLf = "rbxassetid://9468063157"
-	sky.SkyboxFt = "rbxassetid://9468061027"
-	sky.SkyboxBk = "rbxassetid://9468068462"
-	sky.SkyboxDn = "rbxassetid://9468081097"
-	sky.SkyboxRt = "rbxassetid://9468057091"
-	sky.SunTextureId = ""
-	sky.SunAngularSize = 11
-	sky.MoonTextureId = ""
-	sky.MoonAngularSize = 30
-	sky.Parent = game:GetService("Lighting")
-	local sunray = Instance.new("SunRaysEffect")
-	sunray.Intensity = 0.03
-	sunray.Parent = game:GetService("Lighting")
-	local bloom = Instance.new("BloomEffect")
-	bloom.Threshold = 2
-	bloom.Intensity = 1
-	bloom.Size = 2
-	bloom.Parent = game:GetService("Lighting")
-	local atmosphere = Instance.new("Atmosphere")
-	atmosphere.Density = 0.3
-	atmosphere.Offset = 0.25
-	atmosphere.Color = Color3.fromRGB(198, 198, 198)
-	atmosphere.Decay = Color3.fromRGB(104, 112, 124)
-	atmosphere.Glare = 0
-	atmosphere.Haze = 0
-	atmosphere.Parent = game:GetService("Lighting")
-end)
 
-function nuker()
 
-	local beds = getbeds()
 
-	for _,bed in pairs(beds) do
-
-		local bedmagnitude = (bed.Position - game.Players.LocalPlayer.Character.PrimaryPart.Position).Magnitude
-
-		if bedmagnitude < 27 then
-
-			local upnum = blocks(bed.Position)
-
-			local x = math.round(bed.Position.X/3)
-
-			local y = math.round(bed.Position.Y/3) + upnum
-
-			local z = math.round(bed.Position.Z/3)
-
-			game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.DamageBlock:InvokeServer({
-
-				["blockRef"] = {
-
-					["blockPosition"] = Vector3.new(x,y,z)
-
-				},
-
-				["hitPosition"] = Vector3.new(x,y,z),
-
-				["hitNormal"] = Vector3.new(x,y,z),
-
-			})
-
-		end
-
-	end
-
-end
 
 
 
@@ -143,6 +72,8 @@ TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
 TextLabel.MouseButton1Down:Connect(function()
 
+	print("Everthing its made by me, yes exactly jn")end)
+
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(126, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(209, 0, 0))}
 
 UIGradient.Parent = TextLabel
@@ -197,9 +128,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 
 end)
 
-local antivoidtransparent = {["Value"] = 50}
-
-local antivoidcolor = {["Hue"] = 0.93, ["Sat"] = 1, ["Value"] = 1}
+ 
 
 game.StarterGui:SetCore("SendNotification", {
 
@@ -841,10 +770,6 @@ local Tab2 = window:NewTab("Other")
 
 local Tab2Section = Tab2:NewSection("etc")
 
-local Tab3 = window:NewTab("World")
-
-local Tab3Section = World:NewSection("AntiVoid")
-
 -- Buttons
 
 Tab1Section:NewToggle("CFrame", "", function(state)
@@ -921,24 +846,6 @@ game:GetService("UserInputService").JumpRequest:connect(function()
 		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 	end
 end)
-
-end)
-
-Tab1Section:NewToggle("Bed Nuker", "Auto breaks bed", function(state)
-
-	if state then
-
-		BindToStepped("BedNuker", 1, function()
-
-			nuker()
-
-		end)
-
-	else
-
-		UnbindFromStepped("BedNuker")
-
-	end
 
 end)
 
@@ -1189,169 +1096,8 @@ tpservice:Teleport(game.PlaceId, plr)
 
 end)
 
-Tab2Section:NewButton("AntiCheat Bypass 1", "1st method", function()
-local player = game.Players.LocalPlayer
-	repeat
-		wait()
-	until player:FindFirstChild("Backpack")
-	local Connection = game.DescendantAdded:Connect(function(Inst)
-		local Success, Error = pcall(function()
-			return Inst.DisplayOrder
-		end)
-		if tostring(Inst) ~= "DevConsoleMaster" and tostring(Inst) ~= "InputCatcher" and Error == "The current identity (2) cannot Class security check (lacking permission 1)" then
-			while true do
-			end
-		end
-	end)
-	local toSave = {}
-	local function saveScript(saved)
-		toSave[saved] = true
-		local storedName = saved.Name
-		saved:GetPropertyChangedSignal("Disabled"):connect(function()
-			if saved.Disabled then
-				local robloxlocked = pcall(function()
-					saved.Disabled = false
-				end)
-				if not robloxlocked then
-					while true do
-					end
-				end
-			end
-		end)
-		saved:GetPropertyChangedSignal("Name"):connect(function()
-			saved.Name = storedName
-		end)
-	end
-	for _, v in pairs(script.Parent:GetChildren()) do
-		if v:IsA("LocalScript") and (v.Name == "check" or v.Name == "checkDo") and v ~= script then
-			saveScript(v)
-		end
-	end
-	script.Parent.ChildRemoved:connect(function(child)
-		if toSave[child] then
-			local saved, cloned = pcall(function()
-				return child:Clone()
-			end)
-			if saved then
-				cloned.Parent = script.Parent
-				saveScript(cloned)
-			else
-				while true do
-				end
-			end
-		end
-	end)
-	local setUpCharacter = function(char)
-		wait(5)
-		for _, v in pairs(char:GetDescendants()) do
-			if v:IsA("BasePart") and v:FindFirstChildOfClass("TouchTransmitter") then
-				while true do
-				end
-			elseif v:IsA("BasePart") then
-				v.ChildAdded:connect(function(child)
-					if child:IsA("TouchTransmitter") then
-						while true do
-						end
-					end
-				end)
-			end
-		end
-		char:WaitForChild("HumanoidRootPart"):GetPropertyChangedSignal("CFrame"):connect(function()
-			while true do
-			end
-		end)
-	end
-	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-		wait(5)
-		setUpCharacter(player.Character)
-	end
-	player.CharacterAdded:connect(function(char)
-		wait(5)
-		setUpCharacter(char)
-	end)
-	player.Backpack.ChildAdded:Connect(function(added)
-		local toolCount = 0
-		for i, v in pairs(player.Backpack:GetChildren()) do
-			if v:IsA("Tool") then
-				toolCount = toolCount + 1
-			end
-		end
-		for i, v in pairs(player.Character:GetChildren()) do
-			if v:IsA("Tool") then
-				toolCount = toolCount + 1
-			end
-		end
-		for i, v in pairs(player:GetChildren()) do
-			if v:IsA("Tool") then
-				toolCount = toolCount + 1
-			end
-		end
-		if toolCount > 2 then
-			while true do
-			end
-		end
-	end)
-    print("...")
-end)
-
-Tab2Section:NewButton("AntiCheat Bypass 2", "2nd method", function()
-local player = game.Players.LocalPlayer local character = player.Character local humanoid = character:WaitForChild('Humanoid') local head = character:WaitForChild('Head') local base = game.Workspace.Baseplate local fall = false local value = nil local value2 = nil local value3 = nil humanoid.StateChanged:connect(function(state) 	if state == Enum.HumanoidStateType.Jumping then 	fall = true 	value = head.CFrame.Y - base.CFrame.Y 	elseif state == Enum.HumanoidStateType.Running or state == Enum.HumanoidStateType.RunningNoPhysics then 		value = head.CFrame.Y - base.CFrame.Y 	elseif state == Enum.HumanoidStateType.Freefall then 		fall = true 	elseif state == Enum.HumanoidStateType.Landed then 		if fall == true then 			value2 = head.CFrame.Y - base.CFrame.Y 			value3 = value - value2 			if value3 > 29 then 				fall = false 				value3 = nil 				humanoid:TakeDamage(30) 			
-end 		
-end 	
-end 
-end)
-    print("...")
-end)
-
-Tab2Section:NewButton("Full AntiCheat Disabler", "!!! NOT MINE !!!", function()
+Tab2Section:NewButton("AntiCheat Disabler", "!!! NOT MINE !!!", function()
 
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/joke%20anticheat.lua'),true))()
 
-end)
-
-end)
-
-runcode(function()
-	local antivoidp
-end)
-
-
-Tab3Section:NewToggle("AntiVoid", "Give's you a second chance to get back on land", function(state)
-	if state then
-		antivoidp = Instance.new("Part", workspace)
-		antivoidp.Name = "AntiVoid"
-		antivoidp.CanCollide = true
-		antivoidp.Size = Vector3.new(2048, 1, 2048)
-		antivoidp.Anchored = true
-		antivoidp.Transparency = 1 - (antivoidtransparent["Value"] / 100)
-		antivoidp.Material = Enum.Material.Neon
-		antivoidp.Color = Color3.fromHSV(antivoidcolor["Hue"], antivoidcolor["Sat"], antivoidcolor["Value"])
-		antivoidp.Position = Vector3.new(0, 23.5, 0)
-		antivoidp.Touched:connect(function(touchedvoid)
-			if touchedvoid.Parent:FindFirstChild("Humanoid") and touchedvoid.Parent.Name == lplr.Name then
-				lplr.Character.Humanoid.Jump = true
-				lplr.Character.Humanoid:ChangeState("Jumping")
-				wait(0.2)
-				lplr.Character.Humanoid:ChangeState("Jumping")
-				wait(0.2)
-				lplr.Character.Humanoid:ChangeState("Jumping")
-			end
-		end)
-	else
-		if antivoidp then
-			antivoidp:Remove()
-		end
-	end
-end)
-
-Tab3Section:NewColorPicker("Color", "Adjust antivoid color", Color3.fromHSV(antivoidcolor["Hue"], antivoidcolor["Sat"], antivoidcolor["Value"]), function(val)
-	if antivoidp then
-		antivoidp.Color = (val)
-	end
-end)
-
-Tab3Section:NewSlider("Invisible 1-100", "Adjust antivoid transparency", 100, 0, function(val)
-	if antivoidp then
-		antivoidp.Transparency = 1 - (val / 100)
-	end
 end)
