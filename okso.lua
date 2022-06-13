@@ -2,15 +2,7 @@
 
 
 
-if game.Players.LocalPlayer.UserId == 2806417032 then
 
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("soy mr reaper","All")
-
-wait(1.2)	
-
-game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("por q no se como cagar","All")
-
-else
 
 
 
