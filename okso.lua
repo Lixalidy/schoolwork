@@ -1,7 +1,7 @@
 
 
 
-if game.Players.LocalPlayer.UserId == 2806417032 then
+if game.Players.LocalPlayer.UserId == 1 then
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("ola soy pro wey xd","All")
 wait(0.7)
 game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("caca lol","All")
