@@ -695,7 +695,7 @@ function blocks(bed)
 
 end
 
-local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandLittleBrother/SytroNight4ROBLOX/main/libraries/kavo.lua"))()
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
 local window = kavoUi.CreateLib("🌠 Midnight X 🌠", "Midnight")
 
@@ -1140,6 +1140,25 @@ Tab2Section:NewToggle("Sprint", "Automatically on your sprint", function(state)
 		UnbindFromStepped("Sprint")
 		SprintCont:stopSprinting()
 	end
+end)
+
+Tab2Section:NewButton("Gravity Fly Toggle (PC)", "!!! ONLY FOR PC !!!", function()
+local key = "C"
+function main(act, state, obj)
+  if state == Enum.UserInputState.Begin then
+    game.Workspace.Gravity = 0
+  else
+    game.Workspace.Gravity = 192.6
+  end
+end
+local CAS = game:GetService("ContextActionService")
+CAS:UnbindAction("BoundAction")
+CAS:BindAction("BoundAction", main, false, Enum.KeyCode[key])
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+Title = "🌠 Midnight X 🌠";
+Text = "Hold C to Fly";
+})
 end)
 
 runcode(function()
